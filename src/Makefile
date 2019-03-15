@@ -1,11 +1,14 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
 
 #---------------------------------------------------------------
-all: player.o clean
+all: player   clean
 
 
 player.so: player.o
 	gcc $^ -shared $@
+
+player: player.o
+	gcc -o $@ $^
 
 player.o: player.c
 	gcc $(CFLAGS) -c -fPIC $^ -o $@

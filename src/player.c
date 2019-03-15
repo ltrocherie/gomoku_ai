@@ -7,17 +7,18 @@
 #define NB_OPENING_MOVE 3
 
 char const* get_player_name(){
-  char* name = malloc(MAX_NAME_LENGTH*sizeof(char));
-  scanf("[a-zA-Z0-9 -_]%s", name);
+  char *name = malloc(MAX_NAME_LENGTH*sizeof(char));
+  name = "ready";
   return name;
 };
 
 struct col_move_t* propose_opening(size_t size){
+  srand(42);
   struct col_move_t* move = malloc(NB_OPENING_MOVE * sizeof(struct col_move_t));
   for(int i = 0; i<NB_OPENING_MOVE; i++){
     struct move_t mv;
-    mv.row = i;
-    mv.col = i;
+    mv.row = rand()%size;
+    mv.col = rand()%size;
     struct col_move_t mv_next;
     mv_next.m = mv;
     mv_next.c = i%2;
@@ -25,3 +26,7 @@ struct col_move_t* propose_opening(size_t size){
   }
   return move;
 };
+
+int accept_opening(size_t size, const struct col_move_t* opening){
+  return 1;
+}
