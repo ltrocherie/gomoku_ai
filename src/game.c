@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX_SIZE 11
+
 struct board{
-  char m[11][11];
+  char m[MAX_SIZE][MAX_SIZE];
   int size;
-  int winner;
 };
 
 struct board ini_game(int n)
@@ -20,13 +21,13 @@ struct board ini_game(int n)
   return bd;
 }
 
-void place(struct board* bd, int l, int c, int pl)
+int place(struct board* bd, struct col_move col)
 {
-  if (!bd->m[l][c]) {
-    bd->m[l][c] = pl; }
-  else {
-    bd->winner = pl%2 + 1;
+  if (!bd->m[col.m.row][col.m.col]) {
+    bd->m[col.m.row][col.m.col] = col.c;
+    return 0;
   }
+  return -1;
 }
 
 int is_winning(struct board bd)
