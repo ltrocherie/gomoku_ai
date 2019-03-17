@@ -4,6 +4,19 @@
 #include <stddef.h>
 #include "move.h"
 
+
+struct player{
+  char * name;
+  int color;
+  char const* (*get_player_name)();
+  struct col_move_t* (*propose_opening)(size_t size);
+  int (*accept_opening)(size_t size, const struct col_move_t* opening);
+  void (*initialize)(size_t size, enum color_t id);
+  struct move_t (*play)(struct col_move_t const previous_moves[], size_t n_moves);
+  void (*finalize)();
+};
+
+
 /* Public functions */
 
 /* Access to player informations
@@ -69,6 +82,6 @@ struct move_t play(struct col_move_t const previous_moves[], size_t n_moves);
  * - every allocation done during the calls to initialize and play
  *   functions must have been freed
  */
-void finalize();
+
 
 #endif // _BITBOARD_PLAYER_H_
