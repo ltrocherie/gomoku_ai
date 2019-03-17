@@ -9,6 +9,8 @@ struct board;
 struct board ini_game(int n);
 
 int place(struct board* bd, struct col_move_t col);
+
+int align(struct board const bd, struct col_move_t col)
   
 int is_winning(struct board bd);
 
