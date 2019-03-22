@@ -1,7 +1,7 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
 
 #---------------------------------------------------------------
-all: player   clean
+all: player clean cleanall
 
 
 player.so: player.o
@@ -20,3 +20,6 @@ test:
 #---------------------------------------------------------------
 clean:
 	rm -f a.out *.o *# *~
+
+cleanall:
+	rm -f player

@@ -1,2 +1,4 @@
 #######################################################
 Semaine 1 :
+
+Dans le fichier server.c on a effectué un parse opt qui recupère les données nécessaires sur la ligne de commande comme la taille du board, les bibliothèques des joueurs et savoir si l'option swap est activé ou pas. Le chargement dynamique est ensuite realisé pour récuperer les fonctions dans les bibliothèques. Il reste dans ce fichier à implémenter la boucle de jeu. Toutes les fonctions utilisées dans server.c sont implémentées dans game.c
