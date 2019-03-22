@@ -6,6 +6,8 @@
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3
 
+int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
+
 /*
   These functions are public. The description of the functions
   is in player.h
@@ -21,8 +23,7 @@ char const *get_player_name(){
 }
 
 struct col_move_t* propose_opening(size_t size){
-  srand(42);
-  struct col_move_t* move = malloc(NB_OPENING_MOVE * sizeof(struct col_move_t));
+  struct col_move_t *move = malloc(NB_OPENING_MOVE * sizeof(struct col_move_t));
   for(int i = 0; i<NB_OPENING_MOVE; i++){
     struct move_t mv;
     mv.row = rand()%size;
@@ -69,9 +70,3 @@ void finalize(){
   return;
 }
 
-/*int main(){
-  /*  struct player p;
-  p.initialize = &initialize;
-  p.initialize(5, BLACK);
-  return 0;
-}*/
