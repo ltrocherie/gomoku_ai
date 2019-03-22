@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "move.h"
 
 #define MAX_SIZE 11
 
 struct board{
-  char m[MAX_SIZE][MAX_SIZE];
-  int size;
+char m[MAX_SIZE][MAX_SIZE];
+size_t size;
 };
 
+//initialise un board
 struct board ini_game(int n)
 {
   struct board bd;
-  bd.winner = 0;
   bd.size = n;
   for (size_t i = 0; i < n; i++) {
     for (size_t j = 0; j < n; j++) {
@@ -22,54 +22,106 @@ struct board ini_game(int n)
   return bd;
 }
 
-int place(struct board* bd, struct col_move_t col)
+//place un pion sur bd (infos dans cm)
+int place(struct board* bd, struct col_move_t cm)
 {
-  if (!bd->m[col.m.row][col.m.col]) {
-    bd->m[col.m.row][col.m.col] = col.c;
+  if (!bd->m[cm.m.row][cm.m.col]) {
+    bd->m[cm.m.row][cm.m.col] = cm.c;
     return 0;
   }
   return -1;
 }
 
-int align(struct board const bd, struct col_move_t col)
+//retourne le nombre de pions maximal de la couleur cm.c alignés avec celui en
+//position cm.m sur bd
+int align(struct board const bd, struct col_move_t cm)
 {
-    int max = 0;
-    for (size_t dir = 0; dir < 4; dir++) {
-        ij = 0;
-        if (dir == 0){
-            size_t i;
-            for (i = 0; i < bd.size && i > 0; i++) {
-                struct move_t cas = {col.m[0]+i, col.m[1]};//la case qu'on est en train de regarder
-                if (color(cas) != col.c) {//si le pion sur la case n'est pas de la couleur du joueur qui nous intéresse
-                    i--;
-                    break;
-                }
-            }
-            size_t j;
-            for (j = 0; j < bd.size && j > 0; j++) {
-                struct move_t cas = {col.m[0]-j, col.m[1]};//la case qu'on est en train de regarder
-                if (color(cas) != col.c) {//si le pion sur la case n'est pas de la couleur du joueur qui nous intéresse
-                    j--;
-                    break;
-                }
-            }
-            ij = i+j;
-        }
-        if (dir == 1){
-            size_t i;#TODO
-        }
+  int max = 0;
+  for (size_t dir=0;dir<;dir++){
+    size_t i = cm.m.row, j = cm.m.col;  
 
-
-        if (ij > max){
-            max = ij;
-        }
-        //vérifier que chaque case testée est entre 0 et bd.size pour chacune de ses coordonnées
+    if (dir == 0){ //on travaille sur l'axe vertical
+      int c = 1;
+      for (size_t row=i-1;row>0;row--){ //on compte le nombre de pions similaires 
+	if (bd.m[row][j] == cm.c) //au dessus
+	  c++;
+	else 
+	  break;
+      }
+      for (size_t row=i+1;row<bd.size;row++){ //on compte le nombre de pions 
+	if (bd.m[row][j] == cm.c)         //similaires en dessous
+	  c++;
+	else 
+	  break;
+      }
+      if (c > max)
+	max = c;
     }
+    if (dir == 1){ //on travaille sur l'axe SO-NE
+      int c = 1;
+      for (size_t row=i-1,col=j+1;row>0,col<bd.size;row--,col++){ //on compte 
+	if (bd.m[row][col] == cm.c) //le nombre de pions similaires au dessus 
+	  c++;                      //à droite
+	else 
+	  break;
+      }
+      for (size_t row=i+1,col=j-1;col>0,row<bd.size;col--,row++){ //on compte le 
+	if (bd.m[row][col] == cm.c) //nombre de pions similaires en dessous à 
+	  c++;                      //gauche
+	else 
+	  break;
+      }
+      if (c > max)
+	max = c;
+    }
+    if (dir == 2){ //on travaille sur l'axe horizontal
+      int c = 1;
+      for (size_t col=j+1;col<bd.size;col++){ //on compte le nombre de pions 
+	if (bd.m[i][col] == cm.c) //similaires à droite
+	  c++;
+	else 
+	  break;
+      }
+      for (size_t col=j-1;col>0;col--){ //on compte le nombre de pions 
+	if (bd.m[i][col] == cm.c)         //similaires à gauche
+	  c++;
+	else 
+	  break;
+      }
+      if (c > max)
+	max = c;
+    }
+
+    if (dir == 3){ //on travaille sur l'axe NO-SE
+      int c = 1;
+      for (size_t row=i+1,col=j+1;col<bd.size,row<bd.size;row++,col++){ //on 
+	if (bd.m[row][col] == cm.c) //compte le nombre de pions similaires en 
+	else                        //dessous à droite
+	  break;
+      }
+      for (size_t row=i-1,col=j-1;col>0,row>0;col--,row--){ //on compte le 
+	if (bd.m[row][col] == cm.c) //nombre de pions similaires en dessous à 
+	  c++;                      //gauche
+	else 
+	  break;
+      }
+      if (c > max)
+	max = c;
+    }
+  }
+  return max;
 }
 
-int is_winning(struct board bd)
+//renvoie l'entier associé au gagnant s'il y en a un apres le move cm
+//renvoie l'entier associé au perdant + 4 s'il y en a un après le move cm 
+//renvoie -1 s'il n'y a ni gagnant ni perdant
+int is_winning(struct board bd, struct col_move_t cm)
 {
-  return bd.winner;
+  if (align(bd, cm) == 5)
+    return cm.c;
+  if (align(bd, cm) > 5)
+    return cm.c+4;
+  return -1;
 }
 
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[])

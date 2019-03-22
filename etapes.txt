@@ -1,5 +1,8 @@
 #######################################################
 Semaine 1 :
 
-Dans le fichier server.c on a effectuer un parse opt qui recupere les donnees necessaires sur la ligne de commande comme la taille du board, les bibliotheques des joueurs et savoir si l'option swap est activé ou pas. Le chargement dynamique est enseuite realisé pour recuperer les fonctions dans les bibliotheques. Il reste dans ce fichier a implementer la boucle de jeu. Toutes les fonctions utilisées dans server.c sont implémenter dans game.c
-
+- Création de l'arborescence
+- Création des Makefile
+- Dans le fichier server.c on a effectué un parse opt qui recupère les données nécessaires sur la ligne de commande comme la taille du board, les bibliothèques des joueurs et savoir si l'option swap est activé ou pas. Le chargement dynamique est ensuite realisé pour récuperer les fonctions dans les bibliothèques. Il reste dans ce fichier à implémenter la boucle de jeu. Toutes les fonctions utilisées dans server.c sont implémentées dans game.c
+- Création de game.c : mise en place du board
+- Mise en place des premières fonctions de player.c
