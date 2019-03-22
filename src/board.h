@@ -6,8 +6,12 @@
 #include "move.h"
 
 #define MAX_PLAYERS 4
+#define MAX_SIZE 11
 
-struct board;
+struct board{
+  char m[MAX_SIZE][MAX_SIZE];
+  size_t size;
+};
 
 //initialise un board
 struct board ini_game(int n);
