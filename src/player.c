@@ -69,9 +69,3 @@ void finalize(){
   return;
 }
 
-/*int main(){
-  /*  struct player p;
-  p.initialize = &initialize;
-  p.initialize(5, BLACK);
-  return 0;
-}*/
