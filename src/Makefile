@@ -10,8 +10,8 @@ player.so: player.o
 player: player.o
 	gcc -o $@ $^
 
-player.o: player.c
-	gcc $(CFLAGS) -c -fPIC $^ -o $@
+player.o: player.c player.h
+	gcc ${CFLAGS} -c -fPIC $< -o $@
 
 #---------------------------------------------------------------
 test:
