@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -66,14 +65,13 @@ struct move_t play(struct col_move_t const previous_moves[],
   return next_move;
 }
 
-
 void finalize(){
   return;
 }
 
-int main(){
+/*int main(){
   /*  struct player p;
   p.initialize = &initialize;
-  p.initialize(5, BLACK);*/
+  p.initialize(5, BLACK);
   return 0;
-}
+}*/
