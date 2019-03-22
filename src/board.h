@@ -9,8 +9,8 @@
 
 struct board;
 
-//initialise un board
-struct board ini_game(int n);
+//initialise un board de taille n
+struct board ini_board(int n);
 
 //place un pion sur bd (infos dans cm)
 int place(struct board* bd, struct col_move_t cm);
