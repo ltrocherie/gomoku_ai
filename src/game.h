@@ -10,11 +10,11 @@ struct board;
 
 struct board ini_game(int n);
 
-int place(struct board* bd, struct col_move_t col);
+int place(struct board* bd, struct col_move_t cm);
 
-int align(struct board const bd, struct col_move_t col)
-  
-int is_winning(struct board bd);
+int align(struct board const bd, struct col_move_t cm);
+
+int is_winning(struct board bdn struct col_move_t cm);
 
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[]);
 
