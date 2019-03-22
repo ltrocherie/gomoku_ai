@@ -5,8 +5,8 @@
 #define MAX_SIZE 11
 
 struct board{
-char m[MAX_SIZE][MAX_SIZE];
-size_t size;
+  char m[MAX_SIZE][MAX_SIZE];
+  size_t size;
 };
 
 //initialise un board
@@ -37,8 +37,8 @@ int place(struct board* bd, struct col_move_t cm)
 int align(struct board const bd, struct col_move_t cm)
 {
   int max = 1;
+  size_t i = cm.m.row, j = cm.m.col;
   for (size_t dir=0;dir<4;dir++){
-    size_t i = cm.m.row, j = cm.m.col;
 
     if (dir == 0){ //on travaille sur l'axe vertical
       int c = 1;
@@ -95,15 +95,16 @@ int align(struct board const bd, struct col_move_t cm)
     if (dir == 3){ //on travaille sur l'axe NO-SE
       int c = 1;
       for (size_t row=i+1,col=j+1;col<bd.size,row<bd.size;row++,col++){ //on
-	if (bd.m[row][col] == cm.c) //compte le nombre de pions similaires en
-	else                        //dessous à droite
-	  break;
+    	if (bd.m[row][col] == cm.c) //compte le nombre de pions similaires en
+          c++;                      //dessous à droite
+    	else
+    	  break;
       }
       for (size_t row=i-1,col=j-1;col>0,row>0;col--,row--){ //on compte le
-	if (bd.m[row][col] == cm.c) //nombre de pions similaires en dessous à
-	  c++;                      //gauche
-	else
-	  break;
+    	if (bd.m[row][col] == cm.c) //nombre de pions similaires en dessous à
+    	  c++;                      //gauche
+    	else
+    	  break;
       }
       if (c > max)
 	max = c;
