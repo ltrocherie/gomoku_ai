@@ -1,6 +1,6 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
 
-all: test_player clean cleanall
+all:clean test_player cleanall
 
 test_player: player.o test_player.o
 	gcc -o $@ $^
