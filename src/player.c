@@ -6,15 +6,14 @@
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3
 
-int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
 
 /*
   These functions are public. The description of the functions
   is in player.h
  */
 
-static size_t BOARD_SIZE;
-static int PLAYER_COLOR;
+
+int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
 
 char const *get_player_name(){
   char *name = malloc(MAX_NAME_LENGTH*sizeof(char));
@@ -31,7 +30,10 @@ struct col_move_t* propose_opening(size_t size){
     struct col_move_t mv_next;
     mv_next.m = mv;
     mv_next.c = i%2;
-    move[i] = mv_next;
+    if(!belongs(move, mv, i))
+      move[i] = mv_next;
+    else
+      i--;
   }
   return move;
 }
