@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include "move.h"
 
+size_t BOARD_SIZE;
+int PLAYER_COLOR;
+
 /* Public functions */
 
 /* Access to player informations
@@ -69,6 +72,6 @@ struct move_t play(struct col_move_t const previous_moves[], size_t n_moves);
  * - every allocation done during the calls to initialize and play
  *   functions must have been freed
  */
-void (*finalize)();
+void finalize();
 
 #endif // _BITBOARD_PLAYER_H_
