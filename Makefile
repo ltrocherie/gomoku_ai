@@ -1,6 +1,6 @@
-SRC_DIR = src/
-TST_DIR = test/
-IST_DIR = install/
+SRC_DIR = src
+TST_DIR = test
+IST_DIR = install
 EXEC = server
 
 #---------------------------------------------------------------
@@ -27,3 +27,4 @@ install:
 clean:
 	(cd src && make clean)
 	rm -f a.out *.o *# *~
+	rm -f $(IST_DIR)/$(EXEC)

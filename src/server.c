@@ -3,19 +3,25 @@
 #include <dlfcn.h>
 #include <assert.h>
 #include "game.h"
+#include "server.h"
 
-struct player{
-  char * name;
-  enum color_t color;
-  struct col_move_t const previous_moves[];
-  size_t n_moves;
-  char const* (*get_player_name)();
-  struct col_move_t* (*propose_opening)(size_t size);
-  int (*accept_opening)(size_t size, const struct col_move_t* opening);
-  void (*initialize)(size_t size, enum color_t id);
-  struct move_t (*play)(struct col_move_t const previous_moves[], size_t n_moves);
-  void (*finalize)();
-};
+// fonction pour trier les arguments de la ligne de commande
+int parse_opts( int argc, char* argv[] ) {
+  int opt;
+  while ( ( opt = getopt( argc, argv, "n:" ) ) != -1 ) {
+    switch ( opt ) {
+    case 'n':
+      BOARD_SIZE = atoi( optarg );
+      break;
+    default: /* '?' */
+      fprintf( stderr, "Usage: %s [-n BOARD_SIZE] \n",
+	       argv[0]);
+      exit(EXIT_FAILURE);
+    }
+  }
+  return optind;
+}
+
 
 int main(int argc, char* argv[])
 {
