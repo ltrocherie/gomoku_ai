@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <assert.h>
+#include <getopt.h>
 #include "game.h"
 #include "server.h"
 
