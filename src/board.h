@@ -14,7 +14,7 @@ struct board{
 };
 
 //initialise un board de taille n
-struct board ini_board(int n);
+struct board ini_board(size_t n);
 
 //place un pion sur bd (infos dans cm)
 int place(struct board* bd, struct col_move_t cm);
