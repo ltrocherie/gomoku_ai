@@ -3,7 +3,6 @@
 #include <dlfcn.h>
 #include <assert.h>
 #include <getopt.h>
-<<<<<<< HEAD
 #include <unistd.h>
 #include "move.h"
 #include "board.h"
@@ -23,32 +22,9 @@ struct player{
   struct move_t (*play)(struct col_move_t const previous_moves[], size_t n_moves);
   void (*finalize)();
 };
-=======
-#include "game.h"
-#include "server.h"
-
-// fonction pour trier les arguments de la ligne de commande
-int parse_opts( int argc, char* argv[] ) {
-  int opt;
-  while ( ( opt = getopt( argc, argv, "n:" ) ) != -1 ) {
-    switch ( opt ) {
-    case 'n':
-      BOARD_SIZE = atoi( optarg );
-      break;
-    default: /* '?' */
-      fprintf( stderr, "Usage: %s [-n BOARD_SIZE] \n",
-	       argv[0]);
-      exit(EXIT_FAILURE);
-    }
-  }
-  return optind;
-}
-
->>>>>>> refs/remotes/origin/master
 
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[])
 {
-  //extern char *optarg;
   if(argc <= 1)
     {
       printf( "at least one argument is required\n" );
@@ -70,22 +46,15 @@ void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void*
 	case '?':
 	  fprintf(stderr, "Usage: %s [-s nsecs] name\n", argv[0]);
 	  exit(EXIT_FAILURE);
-	}
-      
+	} 
     }
-  //printf("%d\n", optind);
   if (optind >= argc)
    {
     fprintf(stderr, "Expected argument after options\n");
     exit(EXIT_SUCCESS);
    }
-  for(int i = 0; i<NB_PLAYERS; i++)
-  {
-      
+  for(int i = 0; i<NB_PLAYERS; i++)    
     players_libs[i] = dlopen(argv[optind+i], RTLD_NOW);
-    // printf("%p\n", players_libs[i]);
-  }
-  //printf("Ok\n");
 }
 
 int error_management(size_t board_size, void* players_libs[])
@@ -130,19 +99,16 @@ void initialize_players_data(struct player* players, void* players_libs[])
 void activate_swap_mode(struct col_move_t* moves, size_t board_size, struct player players[])
 {
   moves = players[0].propose_opening(board_size);
-  
   if((players[1].accept_opening)(board_size,moves))
     {
       (players[0].initialize)(board_size, BLACK);
       (players[1].initialize)(board_size, WHITE);
     }
-  
   else
     {
       (players[0].initialize)(board_size, WHITE);
       (players[1].initialize)(board_size, BLACK);
     }
-  
 }
    
 void close_libs(void* players_libs[])
@@ -150,7 +116,6 @@ void close_libs(void* players_libs[])
   for(int i=0; i<NB_PLAYERS; i++)
     dlclose(players_libs[i]);
 }
-
 
 void enqueue(struct col_move_t m, struct col_move_t moves[], size_t* n_moves)
 {
@@ -179,7 +144,7 @@ int main(int argc, char* argv[])
 
   if(error_management(board_size,players_libs))
     exit(1);
-  struct player* players = malloc(2*sizeof(struct player));
+  struct player players[NB_PLAYERS];
   initialize_players_data(players, players_libs);
   struct board board = ini_board(board_size);
   struct col_move_t moves[NB_PLAYERS+2];
@@ -194,36 +159,23 @@ int main(int argc, char* argv[])
       m =(players[1].play)(moves,n_moves);
       col_m.m = m;
       col_m.c = players[1].color;
-      
-      //printf("%ld\n", m.row);
-      //printf("%ld\n", m.col);
-      //printf("%d\n", col_m.c);
       enqueue(col_m, moves,&n_moves);
       m=(players[0].play)(moves,n_moves);
       col_m.m = m;
       col_m.c = players[0].color;
-      
-      //printf("%ld\n", m.row);
-      //printf("%ld\n", m.col);
-      // printf("%d\n", col_m.c);
       enqueue(col_m,moves,&n_moves);
       m=(players[1].play)(moves,n_moves);
       col_m.m = m;
       col_m.c = players[1].color;
       enqueue(col_m,moves,&n_moves);
     }
-  //printf("OK\n");
   while(1)
   {
     for(int i=0; i<NB_PLAYERS; i++)
   	{
 	  m = (players[i].play)(moves,n_moves);
 	  col_m.m = m;
-	  //printf("%ld\n", m.row);
-	  // printf("%ld\n", m.col);
 	  col_m.c = players[0].color;
-	  // printf("%d\n", col_m.c);
-       
 	  place(&board, col_m);
 	  res = is_winning(board, col_m);
 	  if(res != -1)
@@ -235,9 +187,8 @@ int main(int argc, char* argv[])
     //TODO function eliminate    
   }
   printf("Player %d is winner \n",res);
-  //finalize();
+  //finalize(); TODO
   close_libs(players_libs);
-  //  printf("OKK\n");
   return 0;
 }
 
