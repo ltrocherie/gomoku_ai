@@ -1,5 +1,5 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
-SRC = server player1.so player2.so #game.o board.o bitboard.o
+SRC = server player.so #game.o board.o bitboard.o
 
 #---------------------------------------------------------------
 all: build clean cleanall
@@ -27,18 +27,25 @@ bitboard.o: bitboard.c
 game.o: game.c game.h board.h move.h
 	gcc $(CFLAGS) -c $< -o $@
 
-
 #---------------------------------------------------------------
 
 board.o: board.c board.h move.h
 	gcc ${CFLAGS} -c $< -o $@
 
 #---------------------------------------------------------------
-server.o: server.c game.h board.h player.h
-	${CC} -c ${CFLAGS} $< -o $@
+move.o: move.c move.h 
+	gcc $(CFLAGS) -c $< -o $@
 
-server: server.o player.o game.o board.o
-	${CC} $^ -o $@ -ldl
+#---------------------------------------------------------------
+
+server_functions.o: server_functions.c game.h board.h player.h move.h
+	gcc -c ${CFLAGS} $< -o $@
+
+server.o: server.c server_functions.h 
+	gcc -c ${CFLAGS} $< -o $@
+
+server: server.o server_functions.o player.o game.o board.o move.o
+	gcc $^ -o $@ -ldl
 
 
 

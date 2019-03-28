@@ -22,7 +22,7 @@ build:
 install:
 	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player1.so)
 	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player2.so)
-	(cd $(SRC_DIR) && mv ./server ../$(IST_DIR)/$(EXEC))
+	(cd $(SRC_DIR) && mv server ../$(IST_DIR)/$(EXEC))
 
 
 #---------------------------------------------------------------
