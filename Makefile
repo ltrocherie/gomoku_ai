@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SRC_DIR=src
 INSTALL_DIR=install
 
@@ -24,11 +25,38 @@ install:build
 	cp server ${INSTALL_DIR}/server
 	cp player1.so ${INSTALL_DIR}/player1.so
 	cp player2.so ${INSTALL_DIR}/player2.so
+=======
+SRC_DIR = src
+TST_DIR = test
+IST_DIR = install
+EXEC = server
+
+#---------------------------------------------------------------
+all: test build install clean
+
+
+#---------------------------------------------------------------
+test:
+	(cd $(TST_DIR) && make test)
+
+#---------------------------------------------------------------
+build:
+	(cd $(SRC_DIR) && make build)
+
+
+#---------------------------------------------------------------
+install:
+	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player1.so)
+	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player2.so)
+	(cd $(SRC_DIR) && mv ./server ../$(IST_DIR)/$(EXEC))
+>>>>>>> refs/remotes/origin/master
 
 
 #---------------------------------------------------------------
 clean:
+	(cd src && make clean)
 	rm -f a.out *.o *# *~
+<<<<<<< HEAD
 
 board.o: ${SRC_DIR}/board.c ${SRC_DIR}/board.h ${SRC_DIR}/move.h
 	${CC} -c ${CFLAGS} $< -o $@
@@ -53,3 +81,6 @@ server: server.o player.o game.o board.o
 
 
 
+=======
+	rm -f $(IST_DIR)/$(EXEC)
+>>>>>>> refs/remotes/origin/master

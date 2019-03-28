@@ -3,6 +3,7 @@
 #include <dlfcn.h>
 #include <assert.h>
 #include <getopt.h>
+<<<<<<< HEAD
 #include <unistd.h>
 #include "move.h"
 #include "board.h"
@@ -22,6 +23,28 @@ struct player{
   struct move_t (*play)(struct col_move_t const previous_moves[], size_t n_moves);
   void (*finalize)();
 };
+=======
+#include "game.h"
+#include "server.h"
+
+// fonction pour trier les arguments de la ligne de commande
+int parse_opts( int argc, char* argv[] ) {
+  int opt;
+  while ( ( opt = getopt( argc, argv, "n:" ) ) != -1 ) {
+    switch ( opt ) {
+    case 'n':
+      BOARD_SIZE = atoi( optarg );
+      break;
+    default: /* '?' */
+      fprintf( stderr, "Usage: %s [-n BOARD_SIZE] \n",
+	       argv[0]);
+      exit(EXIT_FAILURE);
+    }
+  }
+  return optind;
+}
+
+>>>>>>> refs/remotes/origin/master
 
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[])
 {
