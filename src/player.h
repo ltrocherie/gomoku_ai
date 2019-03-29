@@ -13,7 +13,7 @@ int PLAYER_COLOR;
  * RETURNS:
  * - the player name as an [a-zA-Z0-9 -_]* string
  */
-char const* get_player_name(int i);
+char const* get_player_name();
 
 /* Returns a sequence of three moves for an opening
  * PARAM:

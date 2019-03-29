@@ -6,10 +6,9 @@
 #include <unistd.h>
 #include "server_functions.h"
 
-/*
-  parse_arg balaye la ligne de commande en effectuant un parse-opt 
-  puis recupere les bibliotheques des joueurs
-*/
+//  parse_arg balaye la ligne de commande en effectuant un parse-opt 
+// puis recupere les bibliotheques des joueurs
+
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[])
 {
   if(argc <= 1)
@@ -24,11 +23,9 @@ void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void*
 	{
 	case 'n':
 	  (*board_size) =(size_t)atoi(optarg);
-	  //  printf("%ld\n",*board_size);
 	  break;
 	case 'o':
 	  (*swap_mode) = 1;
-	  // printf("%d\n", *swap_mode);
 	  break;
 	case '?':
 	  fprintf(stderr, "Usage: %s [-s nsecs] name\n", argv[0]);
@@ -40,8 +37,12 @@ void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void*
     fprintf(stderr, "Expected argument after options\n");
     exit(EXIT_SUCCESS);
    }
-  for(int i = 0; i<NB_PLAYERS; i++)    
-    players_libs[i] = dlopen(argv[optind+i], RTLD_NOW);
+
+  for(int i = 0; i<NB_PLAYERS; i++)
+    {
+      printf("\n");
+      players_libs[i] = dlopen(argv[optind+i], RTLD_LAZY);
+    }
 }
 
 /*
@@ -87,7 +88,7 @@ void initialize_players_data(struct player* players, void* players_libs[])
 	players[i].finalize = dlsym(players_libs[i],"finalize");
 	if(players[i].finalize == NULL)
 	  exit(6);
-	players[i].name = (players[i].get_player_name)(i);
+players[i].name = (players[i].get_player_name)();
       }
 }
 

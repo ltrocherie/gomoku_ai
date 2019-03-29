@@ -9,7 +9,7 @@ struct player{
   char const* name;
   enum color_t color;
   size_t n_moves;
-  char const* (*get_player_name)(int i);
+  char const* (*get_player_name)(void);
   struct col_move_t* (*propose_opening)(size_t size);
   int (*accept_opening)(size_t size, const struct col_move_t* opening);
   void (*initialize)(size_t size, enum color_t id);

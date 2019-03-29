@@ -11,7 +11,7 @@ all: build install test clean
 
 #---------------------------------------------------------------
 test:
-	(cd $(TST_DIR) && make test)
+	(cd $(TST_DIR) && make)
 
 #---------------------------------------------------------------
 build:
@@ -19,9 +19,9 @@ build:
 
 
 #---------------------------------------------------------------
-install:
-	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player1.so)
-	(cd $(SRC_DIR) && cp player.so ../$(IST_DIR)/player2.so)
+install: build
+	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
+	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so
 	(cd $(SRC_DIR) && mv server ../$(IST_DIR)/$(EXEC))
 
 
@@ -29,6 +29,6 @@ install:
 clean:
 	(cd src && make clean)
 	rm -f a.out *.o *# *~
-
+cleanall:
 	rm -f $(IST_DIR)/$(EXEC)
 

@@ -11,13 +11,13 @@
   These functions are public. The description of the functions
   is in player.h
  */
-char* names[2] = {"random1", "random2"};
+//char* names[2] = {"random1", "random2"};
 
 int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
 
-char const *get_player_name(int i){
+char const *get_player_name(){
   char *name = malloc(MAX_NAME_LENGTH*sizeof(char));
-  name = names[i];
+  name = "random";
   return name;
 }
 

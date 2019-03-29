@@ -4,13 +4,15 @@
 
 int main(int argc, char* argv[])
 {
+  
   void* players_libs[NB_PLAYERS];
   size_t board_size = 10;
   int swap_mode = 0;
   parse_arg(argc, argv,&board_size, &swap_mode, players_libs);
-
   if(error_management(board_size,players_libs))
-    exit(1);
+    {
+      exit(1);
+    }
   struct player players[NB_PLAYERS];
   initialize_players_data(players, players_libs);
   struct board board = ini_board(board_size);
