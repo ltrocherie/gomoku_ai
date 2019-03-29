@@ -69,7 +69,7 @@ void initialize_players_data(struct player* players, void* players_libs[])
 {
   for(int i=0; i<NB_PLAYERS; i++)
       {
-	players[i].color = i;
+	players[i].color = i+1;
 	players[i].get_player_name = dlsym(players_libs[0],"get_player_name");
 	if(players[i].get_player_name == NULL)
 	  exit(1);
@@ -88,7 +88,7 @@ void initialize_players_data(struct player* players, void* players_libs[])
 	players[i].finalize = dlsym(players_libs[i],"finalize");
 	if(players[i].finalize == NULL)
 	  exit(6);
-players[i].name = (players[i].get_player_name)();
+	players[i].name = (players[i].get_player_name)();
       }
 }
 
@@ -102,13 +102,17 @@ void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_
   moves = players[0].propose_opening(board_size);
   if((players[1].accept_opening)(board_size,moves))
     {
-      (players[0].initialize)(board_size, BLACK);
-      (players[1].initialize)(board_size, WHITE);
+      (players[0].initialize)(board_size, WHITE);
+      players[0].color = WHITE;
+      (players[1].initialize)(board_size, RED);
+      players[1].color = RED;
     }
   else
     {
-      (players[0].initialize)(board_size, WHITE);
-      (players[1].initialize)(board_size, BLACK);
+      (players[0].initialize)(board_size, RED);
+      players[0].color = RED;
+      (players[1].initialize)(board_size, WHITE);
+      players[0].color = WHITE;
     }
    struct col_move_t col_m;
    struct move_t m;
