@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include "move.h"
 
+#define MAX_NAME_LENGTH 10
+#define NB_OPENING_MOVE 3
+
 size_t BOARD_SIZE;
 int PLAYER_COLOR;
 

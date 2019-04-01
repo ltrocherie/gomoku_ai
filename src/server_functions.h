@@ -23,7 +23,9 @@ int error_management(size_t board_size, void* players_libs[]);
 
 void initialize_players_data(struct player* players, void* players_libs[]);
 
-void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_size, struct player players[]);
+struct col_move_t* activate_swap_mode(size_t* n_moves, size_t board_size, struct player players[]);
+
+void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[], struct board* board, size_t board_size, int* res);
 
 void close_libs(void* players_libs[]);
 

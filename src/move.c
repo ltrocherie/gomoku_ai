@@ -5,7 +5,6 @@
 #include "game.h"
 
 /*
- */
 void enqueue(struct col_move_t m, struct col_move_t moves[], size_t* n_moves)
 {
   if(*n_moves != NB_PLAYERS && *n_moves != 2*NB_PLAYERS)
@@ -22,5 +21,17 @@ void enqueue(struct col_move_t m, struct col_move_t moves[], size_t* n_moves)
 	  *n_moves = NB_PLAYERS;
 	}
     }
+}
+*/
+
+
+void enqueue(struct col_move_t m, struct col_move_t* moves, size_t* n_moves)
+{
+  if(*n_moves == 0)
+    moves = malloc(100*sizeof(struct col_move_t));
+  if(*n_moves%100 == 0 && *n_moves != 0)
+    moves = realloc(moves, (*n_moves+100)*sizeof(struct col_move_t));
+  *(moves + *n_moves) = m;
+  *n_moves = *n_moves+1;
 }
 
