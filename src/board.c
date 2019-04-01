@@ -27,6 +27,18 @@ int place(struct board* bd, struct col_move_t cm)
   return -1;
 }
 
+//affiche le board sur la sortie standard
+void board_display(const struct board* bd, size_t n){
+  for (size_t i = 0; i < n; i++) {
+    for (size_t j = 0; j < n; j++) {
+      printf("%d ",bd->m[i][j]);
+    }
+    printf("\n");
+  }
+  printf("Suivant\n");
+  return;
+}
+
 //retourne le nombre de pions maximal de la couleur cm.c alignés avec celui en
 //position cm.m sur bd
 int align(struct board const bd, struct col_move_t cm)

@@ -27,10 +27,10 @@ int main(int argc, char* argv[])
       (players[0].initialize)(board_size, WHITE);
       (players[1].initialize)(board_size, RED);
     }
+  
   while(res == -1 &&  n_moves != board_size*board_size)
-  {
     play_run(moves, &n_moves, players, &board, board_size, &res);
-  }
+  
   if( n_moves == board_size*board_size)
     printf("No player has aligned fives same colors\n");
   else if(res<=NB_PLAYERS)

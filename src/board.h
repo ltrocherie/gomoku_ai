@@ -23,4 +23,7 @@ int place(struct board* bd, struct col_move_t cm);
 //position cm.m sur bd
 int align(struct board const bd, struct col_move_t cm);
 
+//affiche le board sur la sortie standard
+void board_display(const struct board* bd, size_t n);
+
 #endif
