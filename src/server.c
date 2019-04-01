@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
 	  if(res != -1)
 	    break;
 	  enqueue(col_m,moves,&n_moves);
+	  board_display(&board, board_size);
 	}
   }
   if(res<=NB_PLAYERS)
