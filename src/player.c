@@ -16,7 +16,7 @@
 int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
 
 char const *get_player_name(){
-  char *name = malloc(MAX_NAME_LENGTH*sizeof(char));
+  char *name;
   name = "random";
   return name;
 }

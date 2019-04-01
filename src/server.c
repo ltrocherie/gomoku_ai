@@ -21,8 +21,9 @@ int main(int argc, char* argv[])
   struct col_move_t col_m;
   size_t n_moves = 0;
   int res = -1;
-  if(swap_mode)
+  if(swap_mode){
     activate_swap_mode(moves, &n_moves, board_size, players);
+  }
   else
     {
     (players[0].initialize)(board_size, WHITE);

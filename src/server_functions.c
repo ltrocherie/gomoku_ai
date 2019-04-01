@@ -97,7 +97,7 @@ void initialize_players_data(struct player* players, void* players_libs[])
  et fait 3 tours de jeux pour revenir à une situation comme sans swap. Cela permet que la
  boucle de jeu dans le main soit la meme avec ou sans swap
 */
-void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_size, struct player players[])
+void activate_swap_mode(struct col_move_t moves[3], size_t* n_moves, size_t board_size, struct player players[])
 {
   moves = players[0].propose_opening(board_size);
   if((players[1].accept_opening)(board_size,moves))
@@ -129,6 +129,10 @@ void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_
    col_m.m = m;
    col_m.c = players[1].color;
    enqueue(col_m,moves,n_moves);
+   /*
+   for(int i = 0; i < 3; i++)
+     free(moves);
+   */
 }
 
 /*
