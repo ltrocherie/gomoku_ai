@@ -2,6 +2,7 @@ SRC_DIR = src
 TST_DIR = test
 IST_DIR = install
 EXEC = server
+PLY = *.so
 
 .PHONY:all test build install clean
 
@@ -30,5 +31,6 @@ clean:
 	(cd src && make clean)
 	rm -f a.out *.o *# *~
 cleanall:
-	rm -f $(IST_DIR)/$(EXEC)
+	rm -f $(IST_DIR)/$(EXEC) $(IST_DIR)/$(PLY)
+	(cd $(SRC_DIR) && make cleanall)
 
