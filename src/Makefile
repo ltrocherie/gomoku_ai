@@ -11,10 +11,10 @@ build: ${SRC}
 player.so: player.o
 	gcc $^ -shared -o $@
 
-player: player.o player.h move.h
+player: player.o 
 	gcc -o $@ $^
 
-player.o: player.c player.h
+player.o: player.c 
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
 #---------------------------------------------------------------
@@ -24,24 +24,24 @@ bitboard.o: bitboard.c
 
 #---------------------------------------------------------------
 
-game.o: game.c game.h board.h move.h
+game.o: game.c 
 	gcc $(CFLAGS) -c $< -o $@
 
 #---------------------------------------------------------------
 
-board.o: board.c board.h move.h
+board.o: board.c 
 	gcc ${CFLAGS} -c $< -o $@
 
 #---------------------------------------------------------------
-move.o: move.c move.h 
+move.o: move.c 
 	gcc $(CFLAGS) -c $< -o $@
 
 #---------------------------------------------------------------
 
-server_functions.o: server_functions.c game.h board.h player.h move.h
+server_functions.o: server_functions.c 
 	gcc -c ${CFLAGS} $< -o $@
 
-server.o: server.c server_functions.h 
+server.o: server.c 
 	gcc -c ${CFLAGS} $< -o $@
 
 server: server.o server_functions.o player.o game.o board.o move.o
