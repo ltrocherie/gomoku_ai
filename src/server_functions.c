@@ -39,10 +39,7 @@ void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void*
    }
 
   for(int i = 0; i<NB_PLAYERS; i++)
-    {
-      printf("\n");
-      players_libs[i] = dlopen(argv[optind+i], RTLD_LAZY);
-    }
+    players_libs[i] = dlopen(argv[optind+i], RTLD_LAZY);
 }
 
 /*
@@ -139,13 +136,12 @@ void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[]
   	{
 	  struct move_t m;
 	  struct col_move_t col_m;
-	  printf("moves: %p\n", moves);
 	  m = (players[i].play)(moves,*n_moves);
 	  col_m.m = m;
 	  col_m.c = players[i].color;
 	  place(board, col_m);
+	  board_display(board, board_size);
 	  enqueue(col_m,moves,n_moves);
-	  printf("n_moves : %ld\n", *n_moves);
 	  *res = is_winning(*board, col_m);
 	  if(*res != -1 || *n_moves == board_size*board_size)
 	    break;
