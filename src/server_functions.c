@@ -97,9 +97,9 @@ void initialize_players_data(struct player* players, void* players_libs[])
  et fait 3 tours de jeux pour revenir à une situation comme sans swap. Cela permet que la
  boucle de jeu dans le main soit la meme avec ou sans swap
 */
-void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_size, struct player players[])
+struct col_move_t* activate_swap_mode(size_t* n_moves, size_t board_size, struct player players[])
 {
-  moves = players[0].propose_opening(board_size);
+  struct col_move_t* moves = players[0].propose_opening(board_size);
   if((players[1].accept_opening)(board_size,moves))
     {
       (players[0].initialize)(board_size, WHITE);
@@ -116,7 +116,7 @@ void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_
     }
    struct col_move_t col_m;
    struct move_t m;
-   *n_moves = NB_PLAYERS+1;
+   *n_moves = 3;
    m =(players[1].play)(moves,*n_moves);
    col_m.m = m;
    col_m.c = players[1].color;
@@ -129,6 +129,26 @@ void activate_swap_mode(struct col_move_t* moves, size_t* n_moves, size_t board_
    col_m.m = m;
    col_m.c = players[1].color;
    enqueue(col_m,moves,n_moves);
+   return moves;
+}
+
+void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[], struct board* board, size_t board_size, int* res)
+{
+   for(int i=0; i<NB_PLAYERS; i++)
+  	{
+	  struct move_t m;
+	  struct col_move_t col_m;
+	  printf("moves: %p\n", moves);
+	  m = (players[i].play)(moves,*n_moves);
+	  col_m.m = m;
+	  col_m.c = players[i].color;
+	  place(board, col_m);
+	  enqueue(col_m,moves,n_moves);
+	  printf("n_moves : %ld\n", *n_moves);
+	  *res = is_winning(*board, col_m);
+	  if(*res != -1 || *n_moves == board_size*board_size)
+	    break;
+	}
 }
 
 /*

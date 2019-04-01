@@ -19,8 +19,8 @@ player.o: player.c player.h
 
 #---------------------------------------------------------------
 
-bitboard.o: bitboard.c
-	gcc $(CFLAGS) -c $^ -o $@
+bitboard.o: bitboard.c bitboard.h
+	gcc $(CFLAGS) -c $< -o $@
 
 #---------------------------------------------------------------
 
