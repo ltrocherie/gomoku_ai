@@ -10,7 +10,7 @@ int is_winning(struct board bd, struct col_move_t cm)
 {
   if (align(bd, cm) == 5)
     return cm.c;
-  if (align(bd, cm) > 5)
-    return cm.c+4;
+  //  if (align(bd, cm) > 5)
+  //return cm.c+4;
   return -1;
 }

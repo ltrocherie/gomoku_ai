@@ -29,13 +29,14 @@ int test_initialize(){
   printf("Couleur du joueur : %d\n", PLAYER_COLOR);
   return 0;
 }
-
+/*
 int test_play(){
   struct col_move_t m ={{1,3},0};
   struct col_move_t tab[1] = {m};
   struct move_t mov = play(tab, 1);
   return 0;
 }
+*/
 
 int main(){
   test_get_player_name();

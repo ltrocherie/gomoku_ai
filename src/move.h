@@ -17,4 +17,6 @@ struct col_move_t {
   enum color_t c;
 };
 
+void enqueue(struct col_move_t m, struct col_move_t* moves, size_t* n_moves);
+
 #endif // _BITBOARD_MOVE_H_
