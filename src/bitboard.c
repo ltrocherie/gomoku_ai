@@ -31,6 +31,10 @@ int place(struct board* bd, struct col_move_t cm){
     return 0;
 }
 
+void board_display(const struct board* bd, size_t n){
+  return;
+}
+
 int align(struct board const bd, struct col_move_t cm){
   int n = bd.size;
     int max = 1;

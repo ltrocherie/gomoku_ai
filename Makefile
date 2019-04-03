@@ -2,6 +2,7 @@ SRC_DIR = src
 TST_DIR = test
 IST_DIR = install
 EXEC = server
+EX_TST = server_bit
 PLY = *.so
 
 .PHONY:all test build install clean
@@ -23,7 +24,8 @@ build:
 install: build
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so
-	(cd $(SRC_DIR) && mv server ../$(IST_DIR)/$(EXEC))
+	(cd $(SRC_DIR) && mv $(EXEC) ../$(IST_DIR)/$(EXEC))
+	(cd $(SRC_DIR) && mv $(EX_TST) ../$(IST_DIR)/$(EX_TST))
 
 
 #---------------------------------------------------------------
