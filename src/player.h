@@ -9,6 +9,8 @@
 
 size_t BOARD_SIZE;
 int PLAYER_COLOR;
+struct col_move_t* all_moves;
+size_t all_moves_size;
 
 /* Public functions */
 
