@@ -50,7 +50,7 @@ int align(struct board const bd, struct col_move_t cm)
 
   assert(i>=0 && i<bd.size);
   assert(j>=0 && j<bd.size);
-  
+
   //on travaille sur l'axe vertical
   int c = 1;
   for (ssize_t row=i-1;row>=0;row--){ //on compte le nombre de pions similaires
@@ -58,7 +58,7 @@ int align(struct board const bd, struct col_move_t cm)
       c++;
     else
       break;
-  }  
+  }
   for (ssize_t row=i+1;row<bd.size;row++){ //on compte le nombre de pions
     if (bd.m[row][j] == cm.c)         //similaires en dessous
       c++;
@@ -67,7 +67,7 @@ int align(struct board const bd, struct col_move_t cm)
   }
   if (c > max)
     max = c;
-  
+
   //on travaille sur l'axe SO-NE
   c = 1;
   for (ssize_t row=i-1,col=j+1;row>=0 && col<bd.size;row--,col++){ //on compte
@@ -75,7 +75,7 @@ int align(struct board const bd, struct col_move_t cm)
       c++;                      //à droite
     else
       break;
-  }      
+  }
   for (ssize_t row=i+1, col=j-1;col>=0 && row<bd.size;col--,row++){ //on compte le
     if (bd.m[row][col] == cm.c) //nombre de pions similaires en dessous à
       c++;                      //gauche
@@ -84,7 +84,7 @@ int align(struct board const bd, struct col_move_t cm)
   }
   if (c > max)
     max = c;
-   
+
   //on travaille sur l'axe horizontal
   c = 1;
   for (ssize_t col=j+1;col<bd.size;col++){ //on compte le nombre de pions
@@ -106,8 +106,8 @@ int align(struct board const bd, struct col_move_t cm)
   c = 1;
   for (ssize_t row=i+1,col=j+1;col<bd.size && row<bd.size;row++,col++){ //on
     if (bd.m[row][col] == cm.c) //compte le nombre de pions similaires en
-      c++;                     //dessous à droite   
-    else                        
+      c++;                     //dessous à droite
+    else
       break;
   }
   for (ssize_t row=i-1,col=j-1;col>=0 && row>=0;col--,row--){ //on compte le
@@ -118,6 +118,6 @@ int align(struct board const bd, struct col_move_t cm)
   }
   if (c > max)
     max = c;
-  
+
 return max;
 }

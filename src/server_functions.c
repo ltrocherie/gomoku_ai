@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include "server_functions.h"
 
-//  parse_arg balaye la ligne de commande en effectuant un parse-opt 
+//  parse_arg balaye la ligne de commande en effectuant un parse-opt
 // puis recupere les bibliotheques des joueurs
 
 void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void* players_libs[])
@@ -30,7 +30,7 @@ void parse_arg(int argc, char* argv[], size_t* board_size, int* swap_mode, void*
 	case '?':
 	  fprintf(stderr, "Usage: %s [-s nsecs] name\n", argv[0]);
 	  exit(EXIT_FAILURE);
-	} 
+	}
     }
   if (optind >= argc)
    {
@@ -90,7 +90,7 @@ void initialize_players_data(struct player* players, void* players_libs[])
 }
 
 /*
-  cette donction active le mode swap quand la demande est faite sur la ligne de commande 
+  cette donction active le mode swap quand la demande est faite sur la ligne de commande
  et fait 3 tours de jeux pour revenir à une situation comme sans swap. Cela permet que la
  boucle de jeu dans le main soit la meme avec ou sans swap
 */
