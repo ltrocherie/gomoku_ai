@@ -49,7 +49,7 @@ void initialize(size_t size, enum color_t id){
   BOARD_SIZE = size;
   PLAYER_COLOR = id;
   srand(42);
-  all_moves = malloc(sizeof(int)*BOARD_SIZE*BOARD_SIZE);
+  all_moves = malloc(sizeof(struct col_move_t));
   all_moves_size = 0;
   return;
 }
