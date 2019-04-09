@@ -82,6 +82,6 @@ struct move_t play(struct col_move_t const previous_moves[],
 
 //fonction publique
 void finalize(){
-  free(all_moves);
+  //free(all_moves);
   return;
 }
