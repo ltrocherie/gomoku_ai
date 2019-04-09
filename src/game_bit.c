@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "game.h"
+#include "game_bit.h"
 #include "move.h"
 
 //renvoie l'entier associé au gagnant s'il y en a un apres le move cm
