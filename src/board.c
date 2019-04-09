@@ -13,7 +13,7 @@ struct board ini_board(size_t n)
   bd.size = n;
   for (size_t i = 0; i < n; i++) {
     for (size_t j = 0; j < n; j++) {
-      bd.m[i][j] = 0;
+      bd.m[i][j] = -1;
     }
   }
   return bd;
@@ -22,7 +22,7 @@ struct board ini_board(size_t n)
 //place un pion sur bd (infos dans cm)
 int place(struct board* bd, struct col_move_t cm)
 {
-  if (!bd->m[cm.m.row][cm.m.col]) {
+  if (bd->m[cm.m.row][cm.m.col] == -1) {
     bd->m[cm.m.row][cm.m.col] = cm.c;
     return 0;
   }
