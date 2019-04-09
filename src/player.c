@@ -49,7 +49,7 @@ void initialize(size_t size, enum color_t id){
   BOARD_SIZE = size;
   PLAYER_COLOR = id;
   srand(42);
-  all_moves = malloc(sizeof(struct col_move_t));
+  all_moves = malloc(BOARD_SIZE * BOARD_SIZE *sizeof(struct col_move_t));
   all_moves_size = 0;
   return;
 }
@@ -82,6 +82,7 @@ struct move_t play(struct col_move_t const previous_moves[],
 
 //fonction publique
 void finalize(){
+  //printf("%p\n", all_moves);
   free(all_moves);
   return;
 }
