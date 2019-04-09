@@ -73,7 +73,7 @@ struct move_t play(struct col_move_t const previous_moves[],
       all_moves_size++;
   }
   struct move_t next_move = {.row = rand()%BOARD_SIZE, .col = rand()%BOARD_SIZE};
-  while(belongs(all_moves, next_move, n_moves)){
+  while(belongs(all_moves, next_move, all_moves_size)){
     next_move.row = rand()%BOARD_SIZE;
     next_move.col = rand()%BOARD_SIZE;
   }
