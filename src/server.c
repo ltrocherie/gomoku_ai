@@ -37,6 +37,8 @@ int main(int argc, char* argv[])
     printf("Player %d is winner \n",res);
   //TODO function eliminate
   //finalize(); TODO
+  players[0].finalize();
+  players[1].finalize();
   close_libs(players_libs);
   free(moves);
   return 0;

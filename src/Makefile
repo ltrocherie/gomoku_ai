@@ -29,6 +29,11 @@ game.o: game.c
 
 #---------------------------------------------------------------
 
+game_bit.o: game_bit.c 
+	gcc $(CFLAGS) -c $< -o $@
+
+#---------------------------------------------------------------
+
 board.o: board.c 
 	gcc ${CFLAGS} -c $< -o $@
 
@@ -47,7 +52,7 @@ server.o: server.c
 server: server.o server_functions.o player.o game.o board.o move.o
 	gcc $^ -o $@ -ldl
 
-server_bit: server.o server_functions.o player.o game.o bitboard.o move.o
+server_bit: server.o server_functions.o player.o game_bit.o bitboard.o move.o
 	gcc $^ -o $@ -ldl
 
 
