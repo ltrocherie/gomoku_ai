@@ -1,12 +1,13 @@
 #ifndef BITBOARD_H
 #define BITBOARD_H
 
+#include "move.h"
 #define MAX_PLAYERS 4
 
 struct board{
-    __int128 b0;//les positions jouables sont marquées avec des 0
-    __int128 b[MAX_PLAYERS];//les positions où le joueur a des pions sont marquées 1
-    int size;
+    unsigned __int128 b0;//les positions jouables sont marquées avec des 0 (masque)
+    unsigned __int128 b[MAX_PLAYERS];//les positions où le joueur a des pions sont marquées 1
+    size_t size;
 };
 
 //initialise un board de taille n

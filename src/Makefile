@@ -1,65 +1,37 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
-SRC = server server_bit player.so #game.o board.o bitboard.o
-
-#---------------------------------------------------------------
-all: build clean cleanall
-
-build: ${SRC}
-
-#---------------------------------------------------------------
-#Player compilation
-player.so: player.o
-	gcc $^ -shared -o $@
-
-player: player.o 
-	gcc -o $@ $^
-
-player.o: player.c 
-	gcc ${CFLAGS} -c -fPIC $< -o $@
-
-#---------------------------------------------------------------
-
-bitboard.o: bitboard.c 
-	gcc $(CFLAGS) -c $< -o $@
-
-#---------------------------------------------------------------
-
-game.o: game.c 
-	gcc $(CFLAGS) -c $< -o $@
-
-#---------------------------------------------------------------
-
-game_bit.o: game_bit.c 
-	gcc $(CFLAGS) -c $< -o $@
-
-#---------------------------------------------------------------
-
-board.o: board.c 
-	gcc ${CFLAGS} -c $< -o $@
-
-#---------------------------------------------------------------
-move.o: move.c 
-	gcc $(CFLAGS) -c $< -o $@
-
-#---------------------------------------------------------------
-
-server_functions.o: server_functions.c 
-	gcc -c ${CFLAGS} $< -o $@
-
-server.o: server.c 
-	gcc -c ${CFLAGS} $< -o $@
-
-server: server.o server_functions.o player.o game.o board.o move.o
-	gcc $^ -o $@ -ldl
-
-server_bit: server.o server_functions.o player.o game_bit.o bitboard.o move.o
-	gcc $^ -o $@ -ldl
-
+EX_DIR = board
+EX_BIT_DIR = bitboard
+PL_DIR = player_random
+EX = server
+EX_BIT = server_bit
+PL = player.so
 
 
 #---------------------------------------------------------------
+.PHONY: all build install clean cleanall
+
+all: build install clean cleanall
+
+build:
+	(cd $(EX_DIR) && make build)
+	(cd $(EX_BIT_DIR) && make build)
+	(cd $(PL_DIR) && make build)
+
+install: build
+	(cd $(EX_DIR)/ && mv $(EX) ../)
+	(cd $(EX_BIT_DIR)/ && mv $(EX_BIT) ../)
+	(cd $(PL_DIR)/ && mv $(PL) ../)
+
+
 clean:
 	rm -f a.out *.o *# *~
+	(cd $(EX_DIR) && make clean)
+	(cd $(EX_BIT_DIR) && make clean)
+	(cd $(PL_DIR) && make clean)
+
 
 cleanall:
-	rm -f player player.so
+	(cd $(EX_DIR) && make cleanall)
+	(cd $(EX_BIT_DIR) && make cleanall)
+	(cd $(PL_DIR) && make cleanall)
+	rm -f $(EX) $(EX_BIT) $(PL)

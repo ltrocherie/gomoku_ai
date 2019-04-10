@@ -2,7 +2,7 @@ SRC_DIR = src
 TST_DIR = test
 IST_DIR = install
 EXEC = server
-EX_TST = server_bit
+EXEC_BIT = server_bit
 PLY = *.so
 
 .PHONY:all test build install clean
@@ -12,6 +12,7 @@ all: build install test clean
 
 #---------------------------------------------------------------
 exec:
+	make clean
 	make cleanall
 	make install
 
@@ -25,7 +26,8 @@ build:
 
 
 #---------------------------------------------------------------
-install: build
+install: 
+	(cd $(SRC_DIR) && make install)
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so
 	(cd $(SRC_DIR) && mv $(EXEC) ../$(IST_DIR)/$(EXEC))
@@ -37,6 +39,6 @@ clean:
 	(cd src && make clean)
 	rm -f a.out *.o *# *~
 cleanall:
-	rm -f $(IST_DIR)/$(EXEC) $(IST_DIR)/$(PLY)
+	rm -f $(IST_DIR)/$(EXEC) $(IST_DIR)/$(EXEC_BIT) $(IST_DIR)/$(PLY)
 	(cd $(SRC_DIR) && make cleanall)
 
