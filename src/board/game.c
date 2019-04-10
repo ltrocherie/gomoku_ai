@@ -8,10 +8,10 @@
 //renvoie -1 s'il n'y a ni gagnant ni perdant
 int is_winning(struct board bd, struct col_move_t cm)
 {
-  printf("Is_winning : row = %lu, col = %lu\n", cm.m.row, cm.m.col);
-  printf("Is_winning : color = %d\n", cm.c);
+  //printf("Is_winning : row = %lu, col = %lu\n", cm.m.row, cm.m.col);
+  //printf("Is_winning : color = %d\n", cm.c);
   int res = align(bd,cm);
-  printf("Is_winning : res = %d\n", res);
+  //printf("Is_winning : res = %d\n", res);
   if (res >= 5)
     return cm.c;
   /*  if (align(bd, cm) > 5)
