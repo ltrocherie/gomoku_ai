@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#include "../src/player.h"
+#include "../src/player_random/player.h"
 /*
 extern size_t BOARD_SIZE;
 extern size_t PLAYER_COLOR;

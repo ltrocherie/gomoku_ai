@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../src/game.h"
+#include "../src/board/game.h"
 
 int main(int argc, char* argv[])
 {
