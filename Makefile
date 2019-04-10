@@ -31,7 +31,7 @@ install:
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so
 	(cd $(SRC_DIR) && mv $(EXEC) ../$(IST_DIR)/$(EXEC))
-	(cd $(SRC_DIR) && mv $(EX_TST) ../$(IST_DIR)/$(EX_TST))
+	(cd $(SRC_DIR) && mv $(EXEC_BIT) ../$(IST_DIR)/$(EX_TST))
 
 
 #---------------------------------------------------------------
