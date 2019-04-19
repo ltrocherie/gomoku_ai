@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-
+  printf("OK\n");
   void* players_libs[NB_PLAYERS];
   size_t board_size;
   int swap_mode = 0;
@@ -40,8 +40,11 @@ int main(int argc, char* argv[])
     printf("Player %d is winner \n",res);
   //TODO function eliminate
   //finalize(); TODO
+  
   players[0].finalize();
+  
   players[1].finalize();
+  printf("OK\n");
   close_libs(players_libs);
   free(moves);
   return 0;

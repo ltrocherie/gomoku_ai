@@ -5,7 +5,7 @@
 
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3
-
+struct col_move_t* all_moves;
 /*
   These functions are public. The description of the functions
   is in player.h
