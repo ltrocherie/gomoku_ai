@@ -130,10 +130,11 @@ struct col_move_t* activate_swap_mode(size_t* n_moves, size_t board_size, struct
    return moves;
 }
 
-void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[], struct board* board, size_t board_size, int* res)
+void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[], struct board* board, size_t board_size, int* res,int* free_place)
 {
    for(int i=0; i<NB_PLAYERS; i++)
   	{
+	  *free_place = *free_place-1;
 	  struct move_t m;
 	  struct col_move_t col_m;
 	  m = (players[i].play)(moves,*n_moves);
@@ -146,7 +147,7 @@ void play_run(struct col_move_t* moves, size_t* n_moves, struct player players[]
 	  enqueue(col_m,moves,n_moves);
 	  //printf("Play : color = %d\n", col_m.c);
 	  *res = is_winning(*board, col_m);
-	  if(*res != -1 || *n_moves == board_size*board_size)
+	  if(*res != -1 || !(*free_place))
 	    break;
 	}
    return;

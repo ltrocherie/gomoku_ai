@@ -30,6 +30,8 @@ install:
 	(cd $(SRC_DIR) && make install)
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so
+	cp ${SRC_DIR}/player_min_max.so ${IST_DIR}/player_min_max1.so
+	cp ${SRC_DIR}/player_min_max.so ${IST_DIR}/player_min_max2.so
 	(cd $(SRC_DIR) && mv $(EXEC) ../$(IST_DIR)/$(EXEC))
 	(cd $(SRC_DIR) && mv $(EXEC_BIT) ../$(IST_DIR)/$(EX_TST))
 

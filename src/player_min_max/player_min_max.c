@@ -72,12 +72,15 @@ int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step, struct col_move_t cm, int board_free_place)
 {
+  //printf("min %ld%ld", cm.m.row, cm.m.col);
+  if (step>2)
+    return 0;
   struct col_move_t simul_move;
   int res;
   int min = 1000;
   int win = is_winning(*bd, cm);
   if(win != -1)
-    return min/step;
+    return min;
   if (!board_free_place)
     return 0;
   for(size_t i=0; i<BOARD_SIZE; i++)
@@ -93,6 +96,7 @@ int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 	      res = max(my_testing_board, my_color, ad_color, step+1, simul_move,board_free_place-1); //faire current move
 	      if (res < min)
 		min = res;
+	      my_testing_board->m[i][j] = -1;
 	    }
 	}
     }
@@ -101,6 +105,7 @@ int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step, struct col_move_t cm, int board_free_place)
 {
+  //printf("max %ld%ld", cm.m.row, cm.m.col);
   struct col_move_t simul_move;
   int res;
   int max = -1000;
@@ -122,7 +127,9 @@ int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 	      res = min(my_testing_board, my_color, ad_color, step+1, simul_move, board_free_place-1); //faire current move
 	      if (res > max)
 		max = res;
+	      my_testing_board->m[i][j] = -1;
 	    }
+	  
 	}
     }
    return max;
@@ -130,7 +137,8 @@ int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 
 struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
-  
+
+  //printf("%ld\n", n_moves);
   for(size_t i=0; i<n_moves; i++)
     place(my_testing_board, previous_moves[i]);
   for (size_t i = 0; i < n_moves; i++)
@@ -139,18 +147,19 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
       all_moves_size++;
     }
   
-  struct move_t next_move;
+  struct move_t next_move = {0,0};
   struct col_move_t simul_move;
   int simul_result;
   int max = -100000;
   int board_free_place = BOARD_SIZE*BOARD_SIZE-all_moves_size;
   enum color_t ENNEMIE_COLOR = all_moves[all_moves_size-1].c;
-  printf("%ld\n", BOARD_SIZE);
+  // printf("%ld\n", BOARD_SIZE);
   for(size_t i=0; i<BOARD_SIZE; i++)
     {
       printf("OK\n");
       for(size_t j=0; j<BOARD_SIZE; j++)
 	{
+	  printf("%ld %ld %d\n",i,j, my_testing_board->m[i][j]);
 	  if (my_testing_board->m[i][j] == -1)
 	    {
 	      simul_move.m.row = i;
@@ -158,7 +167,7 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
 	      simul_move.c = PLAYER_COLOR;
 	      place(my_testing_board,simul_move);
 	      simul_result = min(my_testing_board, PLAYER_COLOR, ENNEMIE_COLOR, 1 , simul_move, board_free_place-1); //todo simul_mov et simul_result
-	      printf("%d\n", simul_result);
+	      //	      printf("%d\n", simul_result);
 	      if (simul_result > max)
 		{
 		  max = simul_result;
@@ -168,11 +177,14 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
 	    }
 	}
     }
-  printf("%d\n",max);
+  //printf("%d\n",max);
+  printf("Je place mon pion en %ld %ld !\n", next_move.row, next_move.col);
   return next_move;
 }
 
 void finalize(){
+  free(all_moves);
+  free(my_testing_board);
   return;
 }
 

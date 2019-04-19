@@ -19,19 +19,22 @@ int main(int argc, char* argv[])
   struct col_move_t* moves = NULL;
   size_t n_moves = 0;
   int res = -1;
+  int free_place = board_size*board_size;
   if(swap_mode)
-    moves = activate_swap_mode(&n_moves, board_size, players);
+    {
+      free_place = free_place-3; 
+      moves = activate_swap_mode(&n_moves, board_size, players);
+    }
   else
     {
       moves = malloc(100 * sizeof(struct col_move_t));
       (players[0].initialize)(board_size, WHITE);
       (players[1].initialize)(board_size, RED);
     }
+  while(res == -1 &&  free_place)
+    play_run(moves, &n_moves, players, &board, board_size, &res,&free_place);
 
-  while(res == -1 &&  n_moves != board_size*board_size)
-    play_run(moves, &n_moves, players, &board, board_size, &res);
-
-  if( n_moves == board_size*board_size)
+  if(!free_place)
     printf("No player has aligned fives same colors\n");
   else if(res<=NB_PLAYERS)
     printf("Player %d is winner \n",res);
