@@ -24,11 +24,11 @@ player_min_max.o: player_min_max.c
 
 gamePM.o:
 	(cd ../board && make build)
-	(cp ../board/game.o .)
+	(cp ../board/game.o gamePM.o)
 
 boardPM.o:
 	(cd ../board && make build)
-	(cp ../board/board.o .)
+	(cp ../board/board.o boardPM.o)
 
 #---------------------------------------------------------------
 clean:
