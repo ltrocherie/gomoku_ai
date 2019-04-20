@@ -10,10 +10,10 @@ build: ${SRC}
 
 #---------------------------------------------------------------
 #Player compilation
-player_min_max.so: player_min_max.o game.o board.o
+player_min_max.so: player_min_max.o gamePM.o boardPM.o
 	gcc $^ -shared -o $@
 
-player_min_max: player_min_max.o game.o board.o
+player_min_max: player_min_max.o gamePM.o boardPM.o
 	gcc -o $@ $^
 
 player_min_max.o: player_min_max.c 
@@ -22,11 +22,11 @@ player_min_max.o: player_min_max.c
 #---------------------------------------------------------------
 #Auxilary object files
 
-game.o:
+gamePM.o:
 	(cd ../board && make build)
 	(cp ../board/game.o .)
 
-board.o:
+boardPM.o:
 	(cd ../board && make build)
 	(cp ../board/board.o .)
 
