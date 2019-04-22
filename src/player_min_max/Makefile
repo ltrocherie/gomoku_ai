@@ -22,13 +22,11 @@ player_min_max.o: player_min_max.c
 #---------------------------------------------------------------
 #Auxilary object files
 
-gamePM.o:
-	(cd ../board && make build)
-	(cp ../board/game.o gamePM.o)
+gamePM.o: gamePM.c
+	gcc ${CFLAGS} -c -fPIC $< -o $@	
 
-boardPM.o:
-	(cd ../board && make build)
-	(cp ../board/board.o boardPM.o)
+boardPM.o: boardPM.c
+	gcc ${CFLAGS} -c -fPIC $< -o $@	
 
 #---------------------------------------------------------------
 clean:
