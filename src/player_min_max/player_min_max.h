@@ -2,9 +2,9 @@
 #define _MIN_MAX_PLAYER_H_
 
 #include <stddef.h>
-#include "../board/move.h"
+#include "move.h"
 #include "../board/board.h"
-#include "../board/game.h"
+#include "../server_dir/game.h"
 
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3

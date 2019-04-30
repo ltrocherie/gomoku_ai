@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "move.h"
+#include "../server_dir/move.h"
 
 #define MAX_PLAYERS 4
 #define MAX_SIZE 11

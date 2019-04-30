@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <assert.h>
 
-#include "move.h"
 #include "bitboard.h"
 #define UNUSED(X){ while(0){(void)X;}};
 

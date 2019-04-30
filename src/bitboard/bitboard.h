@@ -1,7 +1,7 @@
 #ifndef BITBOARD_H
 #define BITBOARD_H
 
-#include "move.h"
+#include "../server_dir/move.h"
 #define MAX_PLAYERS 4
 
 struct board{
