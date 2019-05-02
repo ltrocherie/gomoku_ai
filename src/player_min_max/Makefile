@@ -1,5 +1,5 @@
 CFLAGS = -Werror -Wall -g3 -std=c99
-SRC = player_min_max.so player_min_max.o #game.o board.o bitboard.o
+SRC = player_min_max.so #player_min_max.o #game.o board.o bitboard.o
 
 #---------------------------------------------------------------
 .PHONY = build clean cleanall

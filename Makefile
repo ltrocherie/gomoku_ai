@@ -26,7 +26,7 @@ build:
 
 
 #---------------------------------------------------------------
-install: 
+install:
 	(cd $(SRC_DIR) && make install)
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player1.so
 	cp ${SRC_DIR}/player.so ${IST_DIR}/player2.so

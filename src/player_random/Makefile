@@ -4,7 +4,7 @@ SRC = player.so #game.o board.o bitboard.o
 #---------------------------------------------------------------
 all: build clean cleanall
 
-build: ${SRC}
+build: player.so
 
 #---------------------------------------------------------------
 #Player compilation
