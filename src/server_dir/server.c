@@ -5,11 +5,12 @@
 int main(int argc, char* argv[])
 {
   void* players_libs[NB_PLAYERS];
-  size_t board_size;
+  size_t board_size = 0;
   int swap_mode = 0;
   parse_arg(argc, argv,&board_size, &swap_mode, players_libs);
   if(error_management(board_size,players_libs))
     {
+      printf("Please enter a non-null board-size and valid player\n");
       exit(1);
     }
   struct player players[NB_PLAYERS];
@@ -37,13 +38,8 @@ int main(int argc, char* argv[])
     printf("No player has aligned fives same colors\n");
   else if(res<=NB_PLAYERS)
     printf("Player %d is winner \n",res);
-  //TODO function eliminate
-  //finalize(); TODO
-  
-  players[0].finalize();
-  
+  players[0].finalize();  
   players[1].finalize();
-  printf("OK\n");
   close_libs(players_libs);
   free(moves);
   return 0;

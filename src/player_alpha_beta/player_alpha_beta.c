@@ -141,17 +141,13 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
 
   //printf("%ld\n", n_moves);
   for(size_t i=0; i<n_moves; i++)
-    place(my_testing_board, previous_moves[i]);
-  //for (size_t i = 0; i < n_moves; i++)
-  //{
-  //  all_moves[all_moves_size] = previous_moves[i];
-  //  all_moves_size++;
-  //}
-  
+    place(my_testing_board, previous_moves[i]);  
   struct move_t next_move = {0,0};
   struct col_move_t simul_move;
   int max = -100;
   int board_free_place = BOARD_SIZE*BOARD_SIZE-all_moves_size;
+  if(n_moves == 0)
+    return next_move;
   enum color_t ENNEMIE_COLOR = previous_moves[n_moves-1].c;
   // printf("%ld\n", BOARD_SIZE);
   for(size_t i=0; i<BOARD_SIZE; i++)
