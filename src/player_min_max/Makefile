@@ -19,10 +19,10 @@ player_min_max: player_min_max.o ../server_dir/game.o ../server_dir/board.o
 player_min_max.o: player_min_max.c 
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
-boardPM.o: ../board/board.c
+boardPM.o: boardPM.c
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
-gamePM.o: ../server_dir/game.c
+gamePM.o: gamePM.c
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 #---------------------------------------------------------------
 clean:
