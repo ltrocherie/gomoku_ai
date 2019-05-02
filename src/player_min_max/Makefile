@@ -10,7 +10,7 @@ build: ${SRC}
 
 #---------------------------------------------------------------
 #Player compilation
-player_min_max.so: player_min_max.o ../server_dir/game.o ../server_dir/board.o
+player_min_max.so: player_min_max.o boardPM.o gamePM.o  
 	gcc $^ -shared -o $@
 
 player_min_max: player_min_max.o ../server_dir/game.o ../server_dir/board.o
@@ -19,6 +19,11 @@ player_min_max: player_min_max.o ../server_dir/game.o ../server_dir/board.o
 player_min_max.o: player_min_max.c 
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
+boardPM.o: ../board/board.c
+	gcc ${CFLAGS} -c -fPIC $< -o $@
+
+gamePM.o: ../server_dir/game.c
+	gcc ${CFLAGS} -c -fPIC $< -o $@
 #---------------------------------------------------------------
 clean:
 	rm -f a.out *.o *# *~
