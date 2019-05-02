@@ -6,14 +6,11 @@
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3
 static struct board* my_testing_board;
-//struct col_move_t all_moves[BOARD_SIZE*BOARD_SIZE];
-
 
 /*
   These functions are public. The description of the functions
   is in player.h
  */
-//char* names[2] = {"random1", "random2"};
 
 int belongs(struct col_move_t const tab[], struct move_t mv, size_t n);
 
@@ -72,7 +69,6 @@ int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step, struct col_move_t cm, int board_free_place)
 {
-  //printf("min %ld%ld", cm.m.row, cm.m.col);
   if (step>2)
     return 0;
   struct col_move_t simul_move;
@@ -105,7 +101,6 @@ int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step, struct col_move_t cm, int board_free_place)
 {
-  //printf("max %ld%ld", cm.m.row, cm.m.col);
   struct col_move_t simul_move;
   int res;
   int max = -1000;
@@ -136,39 +131,27 @@ int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 }
 
 
-struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
-
-  //printf("%ld\n", n_moves);
+struct move_t play(struct col_move_t previous_moves[],size_t n_moves)
+{
   for(size_t i=0; i<n_moves; i++)
-    place(my_testing_board, previous_moves[i]);
-  //for (size_t i = 0; i < n_moves; i++)
-  //{
-  //  all_moves[all_moves_size] = previous_moves[i];
-  //  all_moves_size++;
-  //}
-  
+    place(my_testing_board, previous_moves[i]);  
   struct move_t next_move = {0,0};
   struct col_move_t simul_move;
   int simul_result;
   int max = -100000;
   int board_free_place = BOARD_SIZE*BOARD_SIZE-all_moves_size;
   enum color_t ENNEMIE_COLOR = previous_moves[n_moves-1].c;
-  printf("%d\n", ENNEMIE_COLOR);
-  // printf("%ld\n", BOARD_SIZE);
   for(size_t i=0; i<BOARD_SIZE; i++)
     {
-      printf("OK\n");
       for(size_t j=0; j<BOARD_SIZE; j++)
 	{
-	  printf("%ld %ld %d\n",i,j, my_testing_board->m[i][j]);
 	  if (my_testing_board->m[i][j] == -1)
 	    {
 	      simul_move.m.row = i;
 	      simul_move.m.col = j;
 	      simul_move.c = PLAYER_COLOR;
 	      place(my_testing_board,simul_move);
-	      simul_result = min(my_testing_board, PLAYER_COLOR, ENNEMIE_COLOR, 1 , simul_move, board_free_place-1); //todo simul_mov et simul_result
-	      //	      printf("%d\n", simul_result);
+	      simul_result = min(my_testing_board, PLAYER_COLOR, ENNEMIE_COLOR, 1 , simul_move, board_free_place-1); 
 	      if (simul_result > max)
 		{
 		  max = simul_result;
@@ -178,8 +161,6 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
 	    }
 	}
     }
-  //printf("%d\n",max);
-  printf("Je place mon pion en %ld %ld !\n", next_move.row, next_move.col);
   return next_move;
 }
 
