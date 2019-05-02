@@ -17,10 +17,10 @@ player_alpha_beta.o: player_alpha_beta.c
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
 
-boardAB.o: boardAB.c
+boardAB.o: ../board/board.c
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
-gameAB.o: gameAB.c
+gameAB.o: ../server_dir/game.c
 	gcc ${CFLAGS} -c -fPIC $< -o $@
 
 #---------------------------------------------------------------
