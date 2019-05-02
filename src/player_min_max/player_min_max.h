@@ -2,7 +2,7 @@
 #define _MIN_MAX_PLAYER_H_
 
 #include <stddef.h>
-#include "move.h"
+#include "../server_dir/move.h"
 #include "../board/board.h"
 #include "../server_dir/game.h"
 

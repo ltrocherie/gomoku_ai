@@ -153,6 +153,7 @@ struct move_t play(struct col_move_t previous_moves[],size_t n_moves){
   int max = -100000;
   int board_free_place = BOARD_SIZE*BOARD_SIZE-all_moves_size;
   enum color_t ENNEMIE_COLOR = previous_moves[n_moves-1].c;
+  printf("%d\n", ENNEMIE_COLOR);
   // printf("%ld\n", BOARD_SIZE);
   for(size_t i=0; i<BOARD_SIZE; i++)
     {

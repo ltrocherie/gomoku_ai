@@ -101,6 +101,8 @@ int min(struct board* bd, enum color_t my_color, enum color_t ad_color, int step
 
 int max(struct board* bd, enum color_t my_color, enum color_t ad_color, int step, struct col_move_t cm, int board_free_place, int current_max)
 {
+  if (step >2)
+    return 0;
   //printf("max %ld%ld", cm.m.row, cm.m.col);
   struct col_move_t simul_move;
   int res = current_max;

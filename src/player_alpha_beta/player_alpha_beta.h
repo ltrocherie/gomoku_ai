@@ -2,9 +2,9 @@
 #define _ALP_BET_PLAYER_H_
 
 #include <stddef.h>
-#include "move.h"
-#include "boardAB.h"
-#include "gameAB.h"
+#include "../server_dir/move.h"
+#include "../board/board.h"
+#include "../server_dir/game.h"
 
 #define MAX_NAME_LENGTH 10
 #define NB_OPENING_MOVE 3

@@ -4,7 +4,6 @@
 
 int main(int argc, char* argv[])
 {
-  printf("OK\n");
   void* players_libs[NB_PLAYERS];
   size_t board_size;
   int swap_mode = 0;
