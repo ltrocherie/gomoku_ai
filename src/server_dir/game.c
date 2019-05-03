@@ -8,13 +8,18 @@
 //renvoie -1 s'il n'y a ni gagnant ni perdant
 int is_winning(struct board bd, struct col_move_t cm)
 {
-  //printf("Is_winning : row = %lu, col = %lu\n", cm.m.row, cm.m.col);
-  //printf("Is_winning : color = %d\n", cm.c);
   int res = align(bd,cm);
-  //printf("Is_winning : res = %d\n", res);
   if (res >= 5)
     return cm.c;
-  /*  if (align(bd, cm) > 5)
-  return cm.c+4;*/
   return -1;
 }
+
+/*
+int test_valid(struct board bd, struct col_move_t cm, enum color color)
+{
+  return( bd[cm.m.row, cm.m.col]== -1 &&
+	 cm.m.col > 0 && cm.m.col < bd.size &&
+	 cm.m.row > 0 && cm.m.row < bd.size &&
+	  cm.c == color)
+}
+*/

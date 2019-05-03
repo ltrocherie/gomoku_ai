@@ -13,5 +13,5 @@
 //renvoie l'entier associé au perdant + 4 s'il y en a un après le move cm
 //renvoie -1 s'il n'y a ni gagnant ni perdant
 int is_winning(struct board bd, struct col_move_t cm);
-
+//int test_valid(struct board bd, struct col_move_t cm, enum color color);
 #endif
