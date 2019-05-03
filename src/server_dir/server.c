@@ -20,12 +20,12 @@ int main(int argc, char* argv[])
   size_t n_moves = 0;
   int res = -1;
   int free_place = board_size*board_size;
-  if(swap_mode)
+  if(swap_mode) //partie concernat l'activation du mode swap
     {
       free_place = free_place-3; 
       moves = activate_swap_mode(&n_moves, board_size, players);
     }
-  else
+  else //sinon initialisation jeu standard
     {
       moves = malloc(100 * sizeof(struct col_move_t));
       (players[0].initialize)(board_size, WHITE);
